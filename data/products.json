@@ -6,7 +6,7 @@
     "price": 10099.0,
     "originalPrice": null,
     "description": "Apple iPhone 16 com 512 GB de armazenamento, na cor preta. Verifique o preço e as condições atuais na Amazon antes da compra.",
-    "image": "imgs/iphone16.jpg"
+    "image": "imgs/iphone16.jpg",
     "store": "Amazon",
     "affiliateLink": "https://www.amazon.com.br/dp/B0DJFS7GXV?tag=baratao0a-20",
     "asin": "B0DJFS7GXV",
@@ -19,7 +19,7 @@
     "price": 5999.0,
     "originalPrice": null,
     "description": "Samsung Galaxy S24 Ultra com 256 GB, 12 GB de RAM e acabamento Titânio Preto. Verifique o preço e as condições atuais na Amazon antes da compra.",
-    "image": "imgs/s24ultra.jpg"
+    "image": "imgs/s24ultra.jpg",
     "store": "Amazon",
     "affiliateLink": "https://www.amazon.com.br/dp/B0CQD9VK7X?tag=baratao0a-20",
     "asin": "B0CQD9VK7X",
