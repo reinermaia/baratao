@@ -1,6 +1,5 @@
 // Garimpo — MVP estático
-// Sem backend, sem login. Lê data/products.json e renderiza os cards.
-// Para adicionar/editar ofertas: edite data/products.json (veja README.md).
+// Renderização das ofertas
 
 const state = {
   products: [],
@@ -19,17 +18,25 @@ init();
 async function init() {
   try {
     const res = await fetch("data/products.json", { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
     const data = await res.json();
+
     state.products = data
       .slice()
       .sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt));
+
     render();
+
   } catch (err) {
     grid.innerHTML = "";
     emptyState.hidden = false;
     emptyState.textContent =
       "Não consegui carregar as ofertas (data/products.json). Confira o console.";
+
     console.error("Falha ao carregar products.json:", err);
   }
 
@@ -42,6 +49,7 @@ async function init() {
     btn.addEventListener("click", () => {
       tabs.forEach((b) => b.classList.remove("is-active"));
       btn.classList.add("is-active");
+
       state.filter = btn.dataset.filter;
       render();
     });
@@ -50,64 +58,128 @@ async function init() {
 
 function render() {
   const filtered = state.products.filter((p) => {
-    const matchesFilter = state.filter === "all" || p.category === state.filter;
+    const matchesFilter =
+      state.filter === "all" || p.category === state.filter;
+
     const haystack = normalize(`${p.title} ${p.description}`);
-    const matchesSearch = !state.search || haystack.includes(state.search);
+
+    const matchesSearch =
+      !state.search || haystack.includes(state.search);
+
     return matchesFilter && matchesSearch;
   });
 
-  resultCount.textContent = `${filtered.length} oferta${filtered.length === 1 ? "" : "s"}`;
+  resultCount.textContent =
+    `${filtered.length} oferta${filtered.length === 1 ? "" : "s"}`;
 
   grid.innerHTML = "";
   emptyState.hidden = filtered.length !== 0;
 
-  filtered.forEach((p) => grid.appendChild(renderCard(p)));
+  filtered.forEach((p) => {
+    grid.appendChild(renderCard(p));
+  });
 }
 
 function renderCard(p) {
   const card = document.createElement("article");
   card.className = "deal-card";
 
-  const discount = p.originalPrice && p.originalPrice > p.price
-    ? Math.round((1 - p.price / p.originalPrice) * 100)
-    : null;
+  const discount =
+    p.originalPrice && p.originalPrice > p.price
+      ? Math.round((1 - p.price / p.originalPrice) * 100)
+      : null;
 
   card.innerHTML = `
-    <img class="deal-thumb" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy">
-    <div class="deal-body">
-      <h2 class="deal-title">${escapeHtml(p.title)}</h2>
-      <div class="price-tag">
-        <span class="price-now">${formatBRL(p.price)}</span>
-        ${p.originalPrice ? `<span class="price-was">${formatBRL(p.originalPrice)}</span>` : ""}
-        ${discount ? `<span class="discount-badge">-${discount}%</span>` : ""}
-      </div>
-      <p class="deal-desc">${escapeHtml(p.description)}</p>
-      <div class="deal-meta">
-        <span class="store-badge">${escapeHtml(p.store || "Amazon")}</span>
-        <span>${relativeTime(p.postedAt)}</span>
-      </div>
+    <div class="deal-image-wrap">
+      <img
+        class="deal-thumb"
+        src="${escapeHtml(p.image)}"
+        alt="${escapeHtml(p.title)}"
+        loading="lazy"
+        onerror="this.style.display='none'; this.parentElement.classList.add('image-error')"
+      />
+      <span class="deal-category">
+        ${p.category === "cupom" ? "CUPOM" : "OFERTA"}
+      </span>
     </div>
-    <div class="deal-action">
-      <a class="go-link" href="${escapeHtml(p.affiliateLink)}" target="_blank" rel="nofollow sponsored noopener">
-        Ir para ${escapeHtml(p.store || "Amazon")}
-      </a>
+
+    <div class="deal-body">
+
+      <h2 class="deal-title">
+        ${escapeHtml(p.title)}
+      </h2>
+
+      <p class="deal-desc">
+        ${escapeHtml(p.description)}
+      </p>
+
+      <div class="price-area">
+        <span class="price-now">
+          ${formatBRL(p.price)}
+        </span>
+
+        ${
+          p.originalPrice
+            ? `<span class="price-was">${formatBRL(p.originalPrice)}</span>`
+            : ""
+        }
+
+        ${
+          discount
+            ? `<span class="discount-badge">-${discount}%</span>`
+            : ""
+        }
+      </div>
+
+      <div class="deal-footer">
+
+        <div class="deal-meta">
+          <span class="store-badge">
+            ${escapeHtml(p.store || "Amazon")}
+          </span>
+
+          <span>
+            ${relativeTime(p.postedAt)}
+          </span>
+        </div>
+
+        <a
+          class="go-link"
+          href="${escapeHtml(p.affiliateLink)}"
+          target="_blank"
+          rel="nofollow sponsored noopener"
+        >
+          Ir para Amazon
+        </a>
+
+      </div>
+
     </div>
   `;
+
   return card;
 }
 
 function formatBRL(value) {
-  return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(value);
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  }).format(value);
 }
 
 function relativeTime(iso) {
   const diffMs = Date.now() - new Date(iso).getTime();
   const min = Math.floor(diffMs / 60000);
+
   if (min < 1) return "agora mesmo";
   if (min < 60) return `${min} min atrás`;
+
   const hr = Math.floor(min / 60);
+
   if (hr < 24) return `${hr}h atrás`;
+
   const days = Math.floor(hr / 24);
+
   return `${days}d atrás`;
 }
 
