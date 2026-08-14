@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garimpo — Ofertas Amazon</title>
+<meta name="description" content="Garimpo de ofertas selecionadas na Amazon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="contour-bg" aria-hidden="true">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="none">
+      <path d="M0,80 C200,140 300,20 500,70 C700,120 800,10 1000,60 C1100,85 1150,60 1200,70" />
+      <path d="M0,140 C200,190 320,90 520,130 C720,170 820,80 1020,120 C1120,140 1160,120 1200,130" />
+      <path d="M0,200 C220,240 340,160 540,190 C740,220 840,150 1040,180 C1130,195 1170,180 1200,190" />
+    </svg>
+  </div>
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark">⛏</span>
+      <span class="brand-name">Garimpo</span>
+    </div>
+    <p class="tagline">achados e ofertas garimpadas na Amazon</p>
+    <div class="search-row">
+      <input id="search-input" type="search" placeholder="Buscar nas ofertas..." autocomplete="off">
+      <span class="result-count" id="result-count"></span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Categorias">
+  <button class="tab is-active" data-filter="all">Todas</button>
+  <button class="tab" data-filter="promo">Promoções</button>
+  <button class="tab" data-filter="cupom">Cupons</button>
+</nav>
+
+<main class="deals-wrap">
+  <section id="deals-grid" class="deals-grid" aria-live="polite"></section>
+  <p id="empty-state" class="empty-state" hidden>Nenhum achado por aqui. Tenta outro termo de busca.</p>
+</main>
+
+<footer class="site-footer">
+  <p class="disclosure">Como Associado Amazon, este site pode ganhar comissão sobre compras qualificadas feitas a partir dos links acima. Os preços exibidos são referências no momento da publicação e podem mudar na Amazon sem aviso prévio.</p>
+  <p class="credits">Garimpo — MVP estático · sem cadastro, sem login.</p>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "exemplo-fone-bluetooth",
+    "title": "Fone de Ouvido Bluetooth Exemplo XY-200",
+    "category": "promo",
+    "price": 89.90,
+    "originalPrice": 129.90,
+    "description": "Item de exemplo. Substitua pelos dados reais do produto (título, preço e imagem tirados da própria página da Amazon).",
+    "image": "https://placehold.co/240x240/EEEFE8/20241E?text=Foto+do+produto",
+    "store": "Amazon",
+    "affiliateLink": "https://www.amazon.com.br/dp/EXEMPLO1?tag=SEUTAG-20",
+    "postedAt": "2026-08-14T09:00:00-03:00"
+  },
+  {
+    "id": "exemplo-cupom-eletronicos",
+    "title": "Cupom de exemplo — 15% em eletrônicos selecionados",
+    "category": "cupom",
+    "price": 0,
+    "originalPrice": null,
+    "description": "Item de exemplo para a categoria Cupons. Ajuste o texto e o link antes de publicar.",
+    "image": "https://placehold.co/240x240/EEEFE8/20241E?text=Cupom",
+    "store": "Amazon",
+    "affiliateLink": "https://www.amazon.com.br/dp/EXEMPLO2?tag=SEUTAG-20",
+    "postedAt": "2026-08-13T18:30:00-03:00"
+  },
+  {
+    "id": "exemplo-livro-tecnico",
+    "title": "Livro técnico Exemplo — Engenharia de Software",
+    "category": "promo",
+    "price": 54.50,
+    "originalPrice": 79.90,
+    "description": "Segundo item de exemplo, só para mostrar o grid com mais de um card e testar a busca.",
+    "image": "https://placehold.co/240x240/EEEFE8/20241E?text=Foto+do+produto",
+    "store": "Amazon",
+    "affiliateLink": "https://www.amazon.com.br/dp/EXEMPLO3?tag=SEUTAG-20",
+    "postedAt": "2026-08-12T11:15:00-03:00"
+  }
+]
