@@ -1,38 +1,28 @@
 [
   {
-    "id": "exemplo-fone-bluetooth",
-    "title": "Fone de Ouvido Bluetooth Exemplo XY-200",
+    "id": "iphone-16-512-preto",
+    "title": "Apple iPhone 16 (512 GB) – Preto",
     "category": "promo",
-    "price": 89.90,
-    "originalPrice": 129.90,
-    "description": "Item de exemplo. Substitua pelos dados reais do produto (título, preço e imagem tirados da própria página da Amazon).",
-    "image": "https://placehold.co/240x240/EEEFE8/20241E?text=Foto+do+produto",
-    "store": "Amazon",
-    "affiliateLink": "https://www.amazon.com.br/dp/EXEMPLO1?tag=SEUTAG-20",
-    "postedAt": "2026-08-14T09:00:00-03:00"
-  },
-  {
-    "id": "exemplo-cupom-eletronicos",
-    "title": "Cupom de exemplo — 15% em eletrônicos selecionados",
-    "category": "cupom",
-    "price": 0,
+    "price": 10099.0,
     "originalPrice": null,
-    "description": "Item de exemplo para a categoria Cupons. Ajuste o texto e o link antes de publicar.",
-    "image": "https://placehold.co/240x240/EEEFE8/20241E?text=Cupom",
+    "description": "Apple iPhone 16 com 512 GB de armazenamento, na cor preta. Verifique o preço e as condições atuais na Amazon antes da compra.",
+    "image": "https://placehold.co/240x240/EEEFE8/20241E?text=iPhone+16",
     "store": "Amazon",
-    "affiliateLink": "https://www.amazon.com.br/dp/EXEMPLO2?tag=SEUTAG-20",
-    "postedAt": "2026-08-13T18:30:00-03:00"
+    "affiliateLink": "https://www.amazon.com.br/dp/B0DJFS7GXV?tag=baratao0a-20",
+    "asin": "B0DJFS7GXV",
+    "postedAt": "2026-08-14T10:00:00-03:00"
   },
   {
-    "id": "exemplo-livro-tecnico",
-    "title": "Livro técnico Exemplo — Engenharia de Software",
+    "id": "samsung-galaxy-s24-ultra-256-preto",
+    "title": "Samsung Galaxy S24 Ultra, 256 GB, 12 GB RAM – Titânio Preto",
     "category": "promo",
-    "price": 54.50,
-    "originalPrice": 79.90,
-    "description": "Segundo item de exemplo, só para mostrar o grid com mais de um card e testar a busca.",
-    "image": "https://placehold.co/240x240/EEEFE8/20241E?text=Foto+do+produto",
+    "price": 5999.0,
+    "originalPrice": null,
+    "description": "Samsung Galaxy S24 Ultra com 256 GB, 12 GB de RAM e acabamento Titânio Preto. Verifique o preço e as condições atuais na Amazon antes da compra.",
+    "image": "https://placehold.co/240x240/EEEFE8/20241E?text=Galaxy+S24+Ultra",
     "store": "Amazon",
-    "affiliateLink": "https://www.amazon.com.br/dp/EXEMPLO3?tag=SEUTAG-20",
-    "postedAt": "2026-08-12T11:15:00-03:00"
+    "affiliateLink": "https://www.amazon.com.br/dp/B0CQD9VK7X?tag=baratao0a-20",
+    "asin": "B0CQD9VK7X",
+    "postedAt": "2026-08-14T10:05:00-03:00"
   }
 ]
