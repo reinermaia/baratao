@@ -12,6 +12,8 @@ garimpo-mvp/
 │   └── app.js
 ├── data/
 │   └── products.json   ← você edita este arquivo para incluir ofertas
+├── imgs/
+│   └── product_x.jpg   ← você edita este arquivo para incluir ofertas
 └── README.md
 ```
 
