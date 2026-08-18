@@ -75,8 +75,20 @@ body {
 
 .brand {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
+}
+
+.brand-main {
+  width: 30%;
+  height: auto;
+}
+
+.brand-selo {
+  width: 15%;
+  height: auto;
+  margin-left: auto;
+  margin-right: calc((100% - 800px) / 2);
 }
 
 .brand-mark {
