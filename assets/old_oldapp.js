@@ -22,6 +22,9 @@ const tabs = document.querySelectorAll(".tab");
 const countdownTime = document.getElementById("countdown-time");
 const countdownLabel = document.getElementById("countdown-label");
 
+init();
+startCountdown();
+
 async function init() {
   try {
     const res = await fetch("data/products.json", { cache: "no-store" });
@@ -244,10 +247,8 @@ function startCountdown() {
 function updateCountdown() {
   const { shiftedMs, year, month, day } = getSaoPauloParts();
 
-  // Alvo: 00:00:00 do dia seguinte. Date.UTC lida corretamente com o
-  // "dia + 1" mesmo em virada de mês/ano.
-  const nextMidnightShifted = Date.UTC(year, month, day + 1, 0, 0, 0, 0);
-  const diff = Math.max(0, nextMidnightShifted - shiftedMs);
+  const endOfDayShifted = Date.UTC(year, month, day, 23, 59, 59, 999);
+  const diff = Math.max(0, endOfDayShifted - shiftedMs);
 
   const hours = Math.floor(diff / 3600000);
   const minutes = Math.floor((diff % 3600000) / 60000);
@@ -261,16 +262,10 @@ function updateCountdown() {
     const mm = pad(month + 1);
     const yy = String(year).slice(-2);
 
-    countdownLabel.textContent = `Ofertas de ${dd}/${mm}/${yy} até 00:00`;
+    countdownLabel.textContent = `Ofertas de ${dd}/${mm}/${yy} até 23:59`;
   }
 }
 
 function pad(n) {
   return String(n).padStart(2, "0");
 }
-
-// Chamadas de inicialização ficam no fim do arquivo, depois de todas
-// as declarações de const/function — evita o bug de Temporal Dead
-// Zone (referenciar uma const antes da linha onde ela é declarada).
-init();
-startCountdown();
