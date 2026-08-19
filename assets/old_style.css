@@ -91,44 +91,6 @@ body {
   margin-right: calc((100% - 800px) / 2);
 }
 
-.deals-countdown {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  flex: 1;
-  gap: 2px;
-
-  padding: 6px 14px;
-
-  border: 1px solid rgba(184, 134, 47, 0.35);
-  border-radius: 8px;
-  background: rgba(184, 134, 47, 0.08);
-}
-
-.countdown-label {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.02em;
-
-  color: var(--stone-100);
-  opacity: 0.8;
-
-  white-space: nowrap;
-}
-
-.countdown-time {
-  font-family: var(--font-mono);
-  font-size: 1.15rem;
-  font-weight: 600;
-
-  color: var(--gold);
-  letter-spacing: 0.04em;
-
-  font-variant-numeric: tabular-nums;
-}
-
 .brand-mark {
   font-size: 1.4rem;
   transform: rotate(-15deg);
@@ -567,24 +529,6 @@ body {
 
   .brand-name {
     font-size: 1.8rem;
-  }
-
-  .brand {
-    flex-wrap: wrap;
-    justify-content: center;
-    row-gap: 8px;
-  }
-
-  .deals-countdown {
-    padding: 4px 8px;
-  }
-
-  .countdown-label {
-    font-size: 0.58rem;
-  }
-
-  .countdown-time {
-    font-size: 0.95rem;
   }
 
   .tabs {

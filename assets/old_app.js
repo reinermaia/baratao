@@ -1,17 +1,10 @@
 // Garimpo — MVP estático
 // Renderização das ofertas
 
-const SORTERS = {
-  "discount-desc": (a, b) => discountRatio(b) - discountRatio(a),
-  "discount-asc": (a, b) => discountRatio(a) - discountRatio(b),
-  "price-desc": (a, b) => b.price - a.price,
-  "price-asc": (a, b) => a.price - b.price,
-};
-
 const state = {
   products: [],
   search: "",
-  sort: "discount-desc",
+  filter: "all",
 };
 
 const grid = document.getElementById("deals-grid");
@@ -19,11 +12,8 @@ const emptyState = document.getElementById("empty-state");
 const resultCount = document.getElementById("result-count");
 const searchInput = document.getElementById("search-input");
 const tabs = document.querySelectorAll(".tab");
-const countdownTime = document.getElementById("countdown-time");
-const countdownLabel = document.getElementById("countdown-label");
 
 init();
-startCountdown();
 
 async function init() {
   try {
@@ -60,7 +50,7 @@ async function init() {
       tabs.forEach((b) => b.classList.remove("is-active"));
       btn.classList.add("is-active");
 
-      state.sort = btn.dataset.sort;
+      state.filter = btn.dataset.filter;
       render();
     });
   });
@@ -68,40 +58,36 @@ async function init() {
 
 function render() {
   const filtered = state.products.filter((p) => {
-    const haystack = normalize(`${p.title} ${p.description}`);
-    return !state.search || haystack.includes(state.search);
-  });
+    const matchesFilter =
+      state.filter === "all" || p.category === state.filter;
 
-  const sorted = filtered
-    .slice()
-    .sort(SORTERS[state.sort] || SORTERS["discount-desc"]);
+    const haystack = normalize(`${p.title} ${p.description}`);
+
+    const matchesSearch =
+      !state.search || haystack.includes(state.search);
+
+    return matchesFilter && matchesSearch;
+  });
 
   resultCount.textContent =
-    `${sorted.length} oferta${sorted.length === 1 ? "" : "s"}`;
+    `${filtered.length} oferta${filtered.length === 1 ? "" : "s"}`;
 
   grid.innerHTML = "";
-  emptyState.hidden = sorted.length !== 0;
+  emptyState.hidden = filtered.length !== 0;
 
-  sorted.forEach((p) => {
+  filtered.forEach((p) => {
     grid.appendChild(renderCard(p));
   });
-}
-
-// Fração de desconto (0 quando não há originalPrice ou originalPrice <= price).
-// Usada tanto para ordenar quanto para o badge exibido no card.
-function discountRatio(p) {
-  if (p.originalPrice && p.originalPrice > p.price) {
-    return 1 - p.price / p.originalPrice;
-  }
-  return 0;
 }
 
 function renderCard(p) {
   const card = document.createElement("article");
   card.className = "deal-card";
 
-  const ratio = discountRatio(p);
-  const discount = ratio > 0 ? Math.round(ratio * 100) : null;
+  const discount =
+    p.originalPrice && p.originalPrice > p.price
+      ? Math.round((1 - p.price / p.originalPrice) * 100)
+      : null;
 
   card.innerHTML = `
     <div class="deal-image-wrap">
@@ -208,64 +194,4 @@ function escapeHtml(str) {
   const div = document.createElement("div");
   div.textContent = str ?? "";
   return div.innerHTML;
-}
-
-// ============================================================
-// Contador regressivo — "ofertas de hoje até 23:59"
-// ============================================================
-//
-// Puramente visual: reseta o texto/timer à meia-noite, não altera
-// os produtos exibidos.
-//
-// Usa fuso America/Sao_Paulo com offset fixo UTC-3, em vez de
-// Intl/timeZone, porque o Brasil não adota horário de verão desde
-// o Decreto 9.772/2019 — confirmado vigente também em 2026 (sexto/
-// sétimo ano seguido sem ajuste sazonal). Isso evita depender do
-// fuso horário do navegador do visitante, que pode estar fora do
-// Brasil. Se o horário de verão for reinstituído no futuro, este
-// offset fixo precisará ser revisto.
-const SP_OFFSET_MS = -3 * 60 * 60 * 1000;
-
-function getSaoPauloParts() {
-  const shifted = new Date(Date.now() + SP_OFFSET_MS);
-
-  return {
-    shiftedMs: shifted.getTime(),
-    year: shifted.getUTCFullYear(),
-    month: shifted.getUTCMonth(),
-    day: shifted.getUTCDate(),
-  };
-}
-
-function startCountdown() {
-  if (!countdownTime) return;
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-}
-
-function updateCountdown() {
-  const { shiftedMs, year, month, day } = getSaoPauloParts();
-
-  const endOfDayShifted = Date.UTC(year, month, day, 23, 59, 59, 999);
-  const diff = Math.max(0, endOfDayShifted - shiftedMs);
-
-  const hours = Math.floor(diff / 3600000);
-  const minutes = Math.floor((diff % 3600000) / 60000);
-  const seconds = Math.floor((diff % 60000) / 1000);
-
-  countdownTime.textContent =
-    `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-
-  if (countdownLabel) {
-    const dd = pad(day);
-    const mm = pad(month + 1);
-    const yy = String(year).slice(-2);
-
-    countdownLabel.textContent = `Ofertas de ${dd}/${mm}/${yy} até 23:59`;
-  }
-}
-
-function pad(n) {
-  return String(n).padStart(2, "0");
 }
