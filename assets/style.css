@@ -110,7 +110,7 @@ body {
 .countdown-label {
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.09em;
 
   color: var(--stone-100);
   opacity: 0.8;
@@ -124,7 +124,7 @@ body {
   font-weight: 600;
 
   color: var(--gold);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.09em;
 
   font-variant-numeric: tabular-nums;
 }
@@ -218,7 +218,8 @@ body {
 }
 
 .tab.is-active {
-  background: var(--ink);
+  /* background: var(--ink); */
+  background: #232f3e;
   color: var(--stone-50);
   border-color: var(--ink);
 }
